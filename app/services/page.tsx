@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const services = [
   {
@@ -128,81 +129,120 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <section className="py-20 bg-off-white">
-      <Container>
-        {/* Section Heading */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-charcoal">
-            Our Services
-          </h1>
-          <p className="text-lg text-charcoal/70 max-w-2xl mx-auto">
-            Discover our range of professional stitching services tailored to
-            meet your needs with unmatched precision and elegance.
-          </p>
-        </div>
+    <div className="min-h-screen">
+      {/* Hero Section with Background Image */}
+      <section className="relative min-h-screen flex items-center justify-center">
+        {/* Background Image with Overlay */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/assets/gallery/bgwithoverlay.jpg')",
+          }}
+        />
 
-        {/* Services Grid */}
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <Card
-              key={index}
-              className="overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+          <div className="bg-black/30 backdrop-blur-sm rounded-3xl p-12">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
+              Our Services
+            </h1>
+
+            <p className="text-xl md:text-2xl text-gray-200 mb-8">
+              Discover our range of professional stitching services tailored to
+              meet your needs with unmatched precision and elegance.
+            </p>
+
+            <Button
+              asChild
+              size="lg"
+              className="bg-orange-500 hover:bg-orange-600 text-white px-10 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105"
             >
-              {/* Service Image */}
-              <div className="relative w-full h-[390px]">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  width={390}
-                  height={586}
-                  className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-
-              {/* Service Info */}
-              <div className="p-6">
-                <h3 className="text-2xl font-semibold text-charcoal">
-                  {service.title}
-                </h3>
-                <p className="text-coral-red font-medium mt-2">
-                  {service.pricing}
-                </p>
-
-                <p className="text-charcoal/80 mt-4">{service.description}</p>
-
-                <ul className="space-y-2 mt-4 mb-6">
-                  {service.features.map((feature, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-center gap-2 text-charcoal/80"
-                    >
-                      <svg
-                        className="w-5 h-5 text-coral-red flex-shrink-0"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA Button */}
-                <Button className="w-full bg-coral-red text-white font-semibold rounded-full hover:bg-coral-red/90 transition-all">
-                  Order Now
-                </Button>
-              </div>
-            </Card>
-          ))}
+              <Link href="/order">Get Started</Link>
+            </Button>
+          </div>
         </div>
-      </Container>
-    </section>
+      </section>
+
+      {/* Services Grid Section */}
+      <section className="py-20 bg-gray-50">
+        <Container>
+          {/* Section Title */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-charcoal mb-4">
+              What We Offer
+            </h2>
+            <p className="text-lg text-charcoal/70 max-w-2xl mx-auto">
+              From traditional wear to modern fashion, we provide comprehensive stitching services
+              with attention to detail and customer satisfaction.
+            </p>
+          </div>
+
+          {/* Services Grid */}
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, index) => (
+              <Card
+                key={index}
+                className="overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 bg-white"
+              >
+                {/* Service Image */}
+                <div className="relative w-full h-[300px]">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+
+                {/* Service Info */}
+                <div className="p-6">
+                  <h3 className="text-2xl font-semibold text-charcoal mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-coral-red font-medium mb-4">
+                    {service.pricing}
+                  </p>
+
+                  <p className="text-charcoal/80 mb-4">{service.description}</p>
+
+                  <ul className="space-y-2 mb-6">
+                    {service.features.map((feature, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-center gap-2 text-charcoal/80"
+                      >
+                        <svg
+                          className="w-5 h-5 text-coral-red flex-shrink-0"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA Button */}
+                  <Button 
+                    asChild
+                    className="w-full bg-coral-red text-white font-semibold rounded-full hover:bg-coral-red/90 transition-all"
+                  >
+                    <Link href="/order">Order Now</Link>
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+    </div>
   );
 }
